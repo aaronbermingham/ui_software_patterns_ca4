@@ -8,7 +8,10 @@ import { Container, Nav, Navbar, NavDropdown, } from 'react-bootstrap';
 import AuthService from "./services/AuthService";
 import Register from "./components/RegisterComponent";
 import Login from "./components/LoginComponent"; 
-import UserProfile from "./components/UserProfileComponent";
+import UserProfile from "./components/UserProfileComponent"; 
+import AddProduct from "./components/AddProductComponent"; 
+import AllProducts from "./components/AllItemsComponent"; 
+import UpdateProduct from "./components/UpdateProductComponent";
 
 class App extends Component {
 constructor(props) {
@@ -66,7 +69,7 @@ render() {
                 )}
                 {businessUser && (
                   <NavDropdown title="Items" id="collasible-nav-dropdown">
-                    <NavDropdown.Item href={"/addFoodItem"}>Add food</NavDropdown.Item>
+                    <NavDropdown.Item href={"/addProduct"}>Add product</NavDropdown.Item>
                     <NavDropdown.Item href={"/addDrinkItem"}>Add drink</NavDropdown.Item>
                     <NavDropdown.Item href={"/allItems"}>View all</NavDropdown.Item>
                     {/* <NavDropdown.Divider />
@@ -125,7 +128,11 @@ render() {
     <Switch>
       <Route  path={"/register"} component={Register} /> 
       <Route  path={"/login"} component={Login} />
-      <Route  path={"/userProfile"} component={UserProfile} /> 
+      <Route  path={"/userProfile"} component={UserProfile} />  
+      <Route  path={"/addProduct"} component={AddProduct} /> 
+      <Route  path={"/allProducts"} component={AllProducts} /> 
+      <Route  path={"/allProducts"} component={AllProducts} />
+      <Route path={"/updateProduct/:id"} component={UpdateProduct}></Route>
     </Switch>
     </BrowserRouter>
   </div>
