@@ -14,7 +14,7 @@ class AllUserComponent extends Component{
             currentUser: undefined,
         }
         this.addUser = this.addUser.bind(this);
-        this.updateUser = this.updateUser.bind(this);
+        this.viewUser = this.viewUser.bind(this);
     }
 
      componentDidMount(){
@@ -39,8 +39,8 @@ class AllUserComponent extends Component{
         this.props.history.push('/addUser')
     }
 
-    updateUser(id){
-        this.props.history.push(`/update-user/${id}`);
+    viewUser(id){
+        this.props.history.push(`/userDetails/${id}`);
     }
 
 

@@ -14,6 +14,7 @@ import AllProducts from "./components/AllItemsComponent";
 import UpdateProduct from "./components/UpdateProductComponent"; 
 import Items from "./components/ItemsComponent"; 
 import AllUser from "./components/AllUserComponent";
+import UserDetails from "./components/UserDetailsComponent";
 
 class App extends Component {
 constructor(props) {
@@ -136,7 +137,8 @@ render() {
       <Route  path={"/allProducts"} component={AllProducts} /> 
       <Route path={"/updateProduct/:id"} component={UpdateProduct}></Route>
       <Route  path={"/items"} component={Items} /> 
-      <Route  path={"/allUser"} component={AllUser} />
+      <Route  path={"/allUser"} component={AllUser} /> UserDetails
+      <Route path={"/userDetails/:id"} component={UserDetails}></Route>
     </Switch>
     </BrowserRouter>
   </div>
