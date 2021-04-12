@@ -65,7 +65,7 @@ render() {
 
                 {businessUser && (
                   <Nav className="mr-auto"  >
-                    <Nav.Link href={"/allUsers"}>Users</Nav.Link>
+                    <Nav.Link href={"/allUser"}>Users</Nav.Link>
                     <Nav.Link href={"/allBookings"}>Bookings</Nav.Link>
                     <Nav.Link href={"/bisAnalytics"}>Analytics</Nav.Link>
                   </Nav>
