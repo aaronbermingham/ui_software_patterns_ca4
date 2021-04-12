@@ -12,6 +12,11 @@ class CartService {
         return axios.post(CART_API_BASE_URL + "addItem/" + itemId, { headers: authHeader() });
     }
 
+    getCartByUserId(userId){
+        console.log("API call ",CART_API_BASE_URL + "cartByUserId/" + userId)
+        return axios.get(CART_API_BASE_URL + "cartByUserId/" + userId,{ headers: authHeader() });
+    }
+
     // getBookingsById(bookingId){
     //     return axios.get(CART_API_BASE_URL + "bookingById/" + bookingId,{ headers: authHeader() });
     // }

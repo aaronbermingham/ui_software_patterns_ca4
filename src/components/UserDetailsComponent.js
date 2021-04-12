@@ -3,6 +3,7 @@ import ItemService from '../services/ItemService';
 import AuthService from "../services/AuthService";
 import Lost from './LostComponent';
 import UserService from '../services/UserService';
+import CartService from '../services/CartService';
 
 class UserDetailsComponent extends Component {
     constructor(props){
@@ -15,6 +16,9 @@ class UserDetailsComponent extends Component {
             email: '',
             paymentMethod: '',
             password: '',
+            cartId: 0,
+            cart: [],
+            items:[],
             bisUser: false,
             currentUser: undefined,
         }
@@ -32,17 +36,32 @@ class UserDetailsComponent extends Component {
           });
         }
 
-        //UserService.getUserById(this.state.id)
         UserService.getUserById(this.state.id).then((res)=>{
             let user = res.data;
+            console.log("Details ", res.data)
+            console.log("CART ",res.data.cart)
+        console.log("ITEMS ",res.data.cart.items)
             this.setState({
                 name: user.name,
                 address: user.address,
                 email: user.email,
                 paymentMethod: user.paymentMethod,
-                password: user.password
+                password: user.password,
+                cart: user.cart,
+                items: [user.cart.itemList],
+               
             });
         });
+
+        // CartService.getCartByUserId(this.state.id).then((res)=>{
+        //     let shoppingCart = res.data;
+        //     console.log("Carts ", shoppingCart)
+        //     this.setState({
+        //         cart: shoppingCart
+        //     })
+        // })
+       console.log("Cart userId ", this.state.cart)
+        
     }
 
 
@@ -84,14 +103,47 @@ class UserDetailsComponent extends Component {
                                         <label>Password</label>
                                         <input placeholder="Password" name="password" className = "form-control"
                                             value ={this.state.password}/>
-                                    </div>
-                        
+                                    </div>  
+                                    <div className = "form-group">
+                                        <label>Password</label>
+                                        <input placeholder="Password" name="password" className = "form-control"
+                                            value ={this.state.cartId}/>
+                                    </div>  
+                                   
+                                   
                                     <button className = "btn btn-success" onClick={this.updateItem}>Update item</button>
                                     <button className ="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>Cancel</button>
                                 </form>
                             </div>
 
                         </div>
+                        <div>
+                        <table className = "table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                            <th>Order ID</th>
+                                <th>Price</th>
+                                <th>Items</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {
+                                this.state.cart.map(
+                                    shopCart =>
+                                    <tr key = {shopCart.id}>
+                                    <td>{shopCart.id}</td>
+                                    <td>{shopCart.totalPrice}</td>
+                                    {shopCart.itemList.map(item => <td>{item.name}</td>)}
+                                </tr>
+                                )
+                            }
+                            
+                        </tbody>
+
+                    </table>
+                        </div>
+                       
                     </div>
                 </div>):<Lost/>}
             </div>
