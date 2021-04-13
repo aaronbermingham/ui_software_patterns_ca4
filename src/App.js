@@ -15,8 +15,8 @@ import UpdateProduct from "./components/UpdateProductComponent";
 import Items from "./components/ItemsComponent"; 
 import AllUser from "./components/AllUserComponent";
 import UserDetails from "./components/UserDetailsComponent";
-import UserOrder from "./components/UserOrderComponent";
-
+import UserOrder from "./components/UserOrderComponent"; 
+import ProductReview from "./components/ProductReviewComponent";
 
 class App extends Component {
 constructor(props) {
@@ -142,6 +142,7 @@ render() {
       <Route  path={"/allUser"} component={AllUser} /> 
       <Route path={"/userDetails/:id"} component={UserDetails}></Route> 
       <Route  path={"/userOrder"} component={UserOrder} /> 
+      <Route path={"/productReview/:id"} component={ProductReview}></Route> 
     </Switch>
     </BrowserRouter>
   </div>

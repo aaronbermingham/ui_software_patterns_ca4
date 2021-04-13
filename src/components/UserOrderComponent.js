@@ -47,7 +47,7 @@ class UserOrderComponent extends Component {
   }
 
   reviewItem(id) {
-    this.props.history.push(`/reviewProduct/${id}`);
+    this.props.history.push(`/productReview/${id}`);
   }
 
   render() {
