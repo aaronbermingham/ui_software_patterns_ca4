@@ -15,6 +15,8 @@ import UpdateProduct from "./components/UpdateProductComponent";
 import Items from "./components/ItemsComponent"; 
 import AllUser from "./components/AllUserComponent";
 import UserDetails from "./components/UserDetailsComponent";
+import UserOrder from "./components/UserOrderComponent";
+
 
 class App extends Component {
 constructor(props) {
@@ -100,7 +102,7 @@ render() {
                 {currentUser && !businessUser && (
                   <Nav className="mr-auto" >
                     <Nav.Link href={"/addBooking"}>New Booking</Nav.Link>
-                    <Nav.Link href="/login" onClick={this.logOut}>Your Bookings</Nav.Link>
+                    <Nav.Link href="/userOrder" >Your orders</Nav.Link>
                   </Nav>
                 )}
               </Nav>
@@ -137,8 +139,9 @@ render() {
       <Route  path={"/allProducts"} component={AllProducts} /> 
       <Route path={"/updateProduct/:id"} component={UpdateProduct}></Route>
       <Route  path={"/items"} component={Items} /> 
-      <Route  path={"/allUser"} component={AllUser} /> UserDetails
-      <Route path={"/userDetails/:id"} component={UserDetails}></Route>
+      <Route  path={"/allUser"} component={AllUser} /> 
+      <Route path={"/userDetails/:id"} component={UserDetails}></Route> 
+      <Route  path={"/userOrder"} component={UserOrder} /> 
     </Switch>
     </BrowserRouter>
   </div>
