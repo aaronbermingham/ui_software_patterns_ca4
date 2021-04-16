@@ -29,6 +29,11 @@ class ItemService {
         return axios.delete(ITEM_API_BASE_URL + "deleteItem/" + id, { headers: authHeader() });
     }
 
+    searchItem(searchText){
+        console.log(ITEM_API_BASE_URL + "search/" + searchText);
+        return axios.get(ITEM_API_BASE_URL + "search/" + searchText, { headers: authHeader() });
+    }
+
 
    
 }
