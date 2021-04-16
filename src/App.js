@@ -17,7 +17,8 @@ import AllUser from "./components/AllUserComponent";
 import UserDetails from "./components/UserDetailsComponent";
 import UserOrder from "./components/UserOrderComponent"; 
 import ProductReview from "./components/ProductReviewComponent"; 
-import Search from "./components/SearchComponent";
+import Search from "./components/SearchComponent"; 
+
 
 class App extends Component {
 constructor(props) {
@@ -69,40 +70,20 @@ render() {
                 {businessUser && (
                   <Nav className="mr-auto"  >
                     <Nav.Link href={"/allUser"}>Users</Nav.Link>
-                    <Nav.Link href={"/allBookings"}>Bookings</Nav.Link>
-                    <Nav.Link href={"/bisAnalytics"}>Analytics</Nav.Link>
+                    <Nav.Link href={"/allOrders"}>Orders</Nav.Link>
                   </Nav>
                 )}
                 {businessUser && (
                   <NavDropdown title="Items" id="collasible-nav-dropdown">
                     <NavDropdown.Item href={"/addProduct"}>Add product</NavDropdown.Item>
-                    <NavDropdown.Item href={"/addDrinkItem"}>Add drink</NavDropdown.Item>
                     <NavDropdown.Item href={"/allProducts"}>View all</NavDropdown.Item>
                     {/* <NavDropdown.Divider />
                     <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item> */}
                   </NavDropdown>
                 )}
-                {businessUser && (
-                  <NavDropdown title="Staff" id="collasible-nav-dropdown">
-                    <NavDropdown.Item href={"/addStaff"}>Add a Staff member</NavDropdown.Item>
-                    <NavDropdown.Item href={"/allStaff"}>View all staff</NavDropdown.Item>
-                    {/* <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item> */}
-                  </NavDropdown>
-                  
-                )}
-                {businessUser && (
-                  <NavDropdown title="Tables" id="collasible-nav-dropdown">
-                    <NavDropdown.Item href={"/addTable"}>Add a table</NavDropdown.Item>
-                    <NavDropdown.Item href={"/allTables"}>Manage tables/Capacity</NavDropdown.Item>
-                    {/* <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item> */}
-                  </NavDropdown>
-                  
-                )}
                 {currentUser && !businessUser && (
                   <Nav className="mr-auto" >
-                    <Nav.Link href={"/addBooking"}>New Booking</Nav.Link>
+                    <Nav.Link href={"/allItems"}>Products</Nav.Link>
                     <Nav.Link href="/userOrder" >Your orders</Nav.Link>
                   </Nav>
                 )}
@@ -132,12 +113,13 @@ render() {
     <div className="container mt-3">
     <BrowserRouter>
     <Switch>
+      <Route  path={"/addProduct"} component={AddProduct} /> 
+      <Route  path={"/allProducts"} component={AllProducts} />
       <Route  path={"/register"} component={Register} /> 
       <Route  path={"/login"} component={Login} />
       <Route  path={"/userProfile"} component={UserProfile} />  
-      <Route  path={"/addProduct"} component={AddProduct} /> 
-      <Route  path={"/allProducts"} component={AllProducts} /> 
-      <Route  path={"/allProducts"} component={AllProducts} /> 
+      
+      <Route  path={"/allItems"} component={Items} />  
       <Route path={"/updateProduct/:id"} component={UpdateProduct}></Route>
       <Route  path={"/items"} component={Items} /> 
       <Route  path={"/allUser"} component={AllUser} /> 
