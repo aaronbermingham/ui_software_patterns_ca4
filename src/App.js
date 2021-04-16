@@ -118,15 +118,14 @@ render() {
       <Route  path={"/register"} component={Register} /> 
       <Route  path={"/login"} component={Login} />
       <Route  path={"/userProfile"} component={UserProfile} />  
-      
       <Route  path={"/allItems"} component={Items} />  
-      <Route path={"/updateProduct/:id"} component={UpdateProduct}></Route>
+      <Route path={"/updateProduct/:id"} component={UpdateProduct}/>
       <Route  path={"/items"} component={Items} /> 
       <Route  path={"/allUser"} component={AllUser} /> 
-      <Route path={"/userDetails/:id"} component={UserDetails}></Route> 
+      <Route path={"/userDetails/:id"} component={UserDetails}/> 
       <Route  path={"/userOrder"} component={UserOrder} /> 
-      <Route path={"/productReview/:id"} component={ProductReview}></Route> 
-      <Route path={"/search"} component={Search}></Route> 
+      <Route path={"/productReview/:id"} component={ProductReview}/> 
+      <Route path={"/search"} component={Search}/>
     </Switch>
     </BrowserRouter>
   </div>
