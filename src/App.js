@@ -77,7 +77,7 @@ render() {
                   <NavDropdown title="Items" id="collasible-nav-dropdown">
                     <NavDropdown.Item href={"/addProduct"}>Add product</NavDropdown.Item>
                     <NavDropdown.Item href={"/addDrinkItem"}>Add drink</NavDropdown.Item>
-                    <NavDropdown.Item href={"/allItems"}>View all</NavDropdown.Item>
+                    <NavDropdown.Item href={"/allProducts"}>View all</NavDropdown.Item>
                     {/* <NavDropdown.Divider />
                     <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item> */}
                   </NavDropdown>
