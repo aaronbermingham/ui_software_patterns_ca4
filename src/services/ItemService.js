@@ -34,6 +34,38 @@ class ItemService {
         return axios.get(ITEM_API_BASE_URL + "search/" + searchText, { headers: authHeader() });
     }
 
+    sortItemNameAscending(){
+        return axios.get(ITEM_API_BASE_URL + "nameAscending", { headers: authHeader() });
+    }
+
+    sortItemManufacturerAscending(){
+        return axios.get(ITEM_API_BASE_URL + "manufacturerAscending", { headers: authHeader() });
+    }
+
+    sortItemPriceAscending(){
+        return axios.get(ITEM_API_BASE_URL + "priceAscending", { headers: authHeader() }); 
+    }
+
+    sortItemTypeAscending(){
+        return axios.get(ITEM_API_BASE_URL + "typeAscending", { headers: authHeader() });
+    }
+
+    sortItemNameDescending(){
+        return axios.get(ITEM_API_BASE_URL + "nameDescending", { headers: authHeader() });
+    }
+
+    sortItemManufacturerDescending(){
+        return axios.get(ITEM_API_BASE_URL + "manufacturerDescending", { headers: authHeader() });
+    }
+
+    sortItemPriceDescending(){
+        return axios.get(ITEM_API_BASE_URL + "priceDescending", { headers: authHeader() }); 
+    }
+
+    sortItemTypeDescending(){
+        return axios.get(ITEM_API_BASE_URL + "typeDescending", { headers: authHeader() });
+    }
+
 
    
 }

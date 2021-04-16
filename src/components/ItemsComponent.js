@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import CartService from "../services/CartService";
 import ItemService from "../services/ItemService";
-import { Card, Button, Row, Col, ListGroup } from "react-bootstrap";
+import { Card, Button, Row, Col } from "react-bootstrap";
 import AuthService from "../services/AuthService";
 
 class ItemsComponent extends Component {
@@ -11,7 +11,7 @@ class ItemsComponent extends Component {
       currentUser: undefined,
       item: [],
     };
-    //this.getItemSummary = this.getItemSummary.bind(this);
+    this.sortItemTitleAscending = this.sortItemTitleAscending.bind(this);
   }
 
   componentDidMount() {
@@ -31,6 +31,70 @@ class ItemsComponent extends Component {
     console.log("id", this.state.id);
   }
 
+  sortItemTitleAscending() {
+    console.log("SORT CLICK");
+    ItemService.sortItemNameAscending().then((res) => {
+      this.setState({ item: res.data });
+      console.log("Item sort ", this.state.item);
+    });
+  }
+
+  sortItemCategoryAscending() {
+    console.log("SORT CLICK");
+    ItemService.sortItemTypeAscending().then((res) => {
+      this.setState({ item: res.data });
+      console.log("Item sort ", this.state.item);
+    });
+  }
+
+  sortItemManufacturerAscending() {
+    console.log("SORT CLICK");
+    ItemService.sortItemManufacturerAscending().then((res) => {
+      this.setState({ item: res.data });
+      console.log("Item sort ", this.state.item);
+    });
+  }
+
+  sortItemPriceAscending() {
+    console.log("SORT CLICK");
+    ItemService.sortItemPriceAscending().then((res) => {
+      this.setState({ item: res.data });
+      console.log("Item sort ", this.state.item);
+    });
+  }
+
+  sortItemTitleDescending() {
+    console.log("SORT CLICK");
+    ItemService.sortItemNameDescending().then((res) => {
+      this.setState({ item: res.data });
+      console.log("Item sort ", this.state.item);
+    });
+  }
+
+  sortItemCategoryDescending() {
+    console.log("SORT CLICK");
+    ItemService.sortItemTypeDescending().then((res) => {
+      this.setState({ item: res.data });
+      console.log("Item sort ", this.state.item);
+    });
+  }
+
+  sortItemManufacturerDescending() {
+    console.log("SORT CLICK");
+    ItemService.sortItemManufacturerDescending().then((res) => {
+      this.setState({ item: res.data });
+      console.log("Item sort ", this.state.item);
+    });
+  }
+
+  sortItemPriceDescending() {
+    console.log("SORT CLICK");
+    ItemService.sortItemPriceDescending().then((res) => {
+      this.setState({ item: res.data });
+      console.log("Item sort ", this.state.item);
+    });
+  }
+
   addItemtoCart(id) {
     console.log("Booking id", this.state.id);
     CartService.addItemToCart(id).then((res) => {
@@ -40,19 +104,6 @@ class ItemsComponent extends Component {
     alert("Great choice, that has been added to your order!");
   }
 
-  // getItemSummary(){
-  //     BookingService.getBookingsById(this.state.id).then((res) => {
-  //         let booking = res.data
-  //         this.setState({
-  //             date: booking.date,
-  //             time: booking.time,
-  //             numGuests: booking.numGuests,
-  //             items: booking.items,
-  //             price: booking.price
-  //         });
-  //     });
-  // }
-
   continue() {
     this.props.history.push(`/booksum/${this.state.id}`);
   }
@@ -60,8 +111,77 @@ class ItemsComponent extends Component {
   render() {
     return (
       <div>
-        <h3 id="main">Products</h3>
+        <h3 className="text-center">Products</h3>
+        <Row>
         <Col>
+            <Button
+              variant="dark"
+              onClick={() => this.sortItemTitleAscending()}
+            >
+              Name A-Z
+            </Button> 
+        </Col>
+        <Col>
+            <Button
+              variant="danger"
+              onClick={() => this.sortItemCategoryAscending()}
+            >
+              Category A-Z
+            </Button> 
+        </Col>
+        <Col>
+            <Button
+              variant="warning"
+              onClick={() => this.sortItemManufacturerAscending()}
+            >
+              Manufacturer A-Z
+            </Button> 
+        </Col>
+        <Col>
+            <Button
+              variant="success"
+              onClick={() => this.sortItemPriceAscending()}
+            >
+              Price low to high
+            </Button> 
+        </Col>
+        </Row>
+        <Col>
+         <Row>
+        <Col>
+            <Button
+              variant="dark"
+              onClick={() => this.sortItemTitleDescending()}
+            >
+              Name Z-A
+            </Button> 
+        </Col>
+        <Col>
+            <Button
+              variant="danger"
+              onClick={() => this.sortItemCategoryDescending()}
+            >
+              Category Z-A
+            </Button> 
+        </Col>
+        <Col>
+            <Button
+              variant="warning"
+              onClick={() => this.sortItemManufacturerDescending()}
+            >
+              Manufacturer Z-A
+            </Button> 
+        </Col>
+        <Col>
+            <Button
+              variant="success"
+              onClick={() => this.sortItemPriceDescending()}
+            >
+              Price high to low
+            </Button> 
+        </Col>
+        </Row>
+        
           <Row>
             {this.state.item.map((item) => (
               <Card>
