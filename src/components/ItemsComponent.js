@@ -10,6 +10,7 @@ class ItemsComponent extends Component {
     this.state = {
       currentUser: undefined,
       item: [],
+      id: 0,
     };
     this.sortItemTitleAscending = this.sortItemTitleAscending.bind(this);
   }
@@ -20,6 +21,7 @@ class ItemsComponent extends Component {
     if (user) {
       this.setState({
         currentUser: user,
+        id: user.id,
       });
     }
 
@@ -97,7 +99,7 @@ class ItemsComponent extends Component {
 
   addItemtoCart(id) {
     console.log("Booking id", this.state.id);
-    CartService.addItemToCart(id).then((res) => {
+    CartService.addItemToCart(id, this.state.id).then((res) => {
       //this.getItemSummary();
     });
 
