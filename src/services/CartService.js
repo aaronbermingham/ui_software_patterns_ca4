@@ -8,8 +8,8 @@ class CartService {
         return axios.get(CART_API_BASE_URL + "all",{ headers: authHeader() });
     }
 
-    addItemToCart(itemId){
-        return axios.post(CART_API_BASE_URL + "addItem/" + itemId, { headers: authHeader() });
+    addItemToCart(itemId, userId){
+        return axios.post(CART_API_BASE_URL + "addItem/" + itemId + "/" + userId, { headers: authHeader() });
     }
 
     getCartByUserId(userId){
@@ -17,21 +17,7 @@ class CartService {
         return axios.get(CART_API_BASE_URL + "cartByUserId/" + userId,{ headers: authHeader() });
     }
 
-    // getBookingsById(bookingId){
-    //     return axios.get(CART_API_BASE_URL + "bookingById/" + bookingId,{ headers: authHeader() });
-    // }
 
-    // clearBookings(){
-    //     return axios.post( "http://localhost:8080/api/user/clearRes", { headers: authHeader() });
-    // }
-
-    // getBookingsByUserId(userId){
-    //     return axios.get(CART_API_BASE_URL + "userBookings/" + userId,{ headers: authHeader() });
-    // }
-
-    // deleteBooking(bookingId){
-    //     return axios.delete(CART_API_BASE_URL + "deleteBooking/" + bookingId,{ headers: authHeader() });
-    // }
 
 
   
