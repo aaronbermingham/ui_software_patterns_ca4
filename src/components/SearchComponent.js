@@ -23,7 +23,7 @@ class SearchComponent extends Component {
     }
 
     handleSubmit(event) {
-        //alert('A name was submitted: ' + this.input.current.value);
+        alert('A name was submitted: ' + this.input.current.value);
         ItemService.searchItem(this.input.current.value).then((res) => {
                 this.setState({ item: res.data });
                 console.log("Item ", res.data)
@@ -86,7 +86,6 @@ class SearchComponent extends Component {
                         <label>Search</label>
                         <input placeholder="Search for item" name="item" className = "form-control"
                              ref={this.input}
-                            // value ={this.state.search} onChange = {this.changeSearchHandler}
                             />
                              <button className = "btn btn-success" onClick={this.handleSubmit} style={{marginTop: "10px"}}>Search item</button>
                         </div>

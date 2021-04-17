@@ -1,10 +1,12 @@
+
+
 import React, { Component } from "react";
 import ItemService from "../services/ItemService";
 import AuthService from "../services/AuthService";
 import Lost from "./LostComponent";
 import { Card, Button, Row, Col, ListGroup } from "react-bootstrap";
 
-class AllItemsComponent extends Component {
+class BisUserSearchComponent extends Component {
   constructor(props) {
     super(props);
     this.input = React.createRef();
@@ -13,13 +15,12 @@ class AllItemsComponent extends Component {
       bisUser: false,
       currentUser: undefined,
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+        
   }
 
   componentDidMount() {
-    ItemService.getItems().then((res) => {
-      this.setState({ item: res.data });
-      console.log("Item ", this.state.item)
-    });
+    
    
     const user = AuthService.getCurrentUser();
     console.log("Current user ", user);
@@ -138,74 +139,7 @@ class AllItemsComponent extends Component {
                              <button className = "btn btn-success" onClick={this.handleSubmit} style={{marginTop: "10px"}}>Search item</button>
                         </div>
                         </form>
-            <Row>
-        <Col>
-            <Button
-              variant="dark"
-              onClick={() => this.sortItemTitleAscending()}
-            >
-              Name A-Z
-            </Button> 
-        </Col>
-        <Col>
-            <Button
-              variant="danger"
-              onClick={() => this.sortItemCategoryAscending()}
-            >
-              Category A-Z
-            </Button> 
-        </Col>
-        <Col>
-            <Button
-              variant="warning"
-              onClick={() => this.sortItemManufacturerAscending()}
-            >
-              Manufacturer A-Z
-            </Button> 
-        </Col>
-        <Col>
-            <Button
-              variant="success"
-              onClick={() => this.sortItemPriceAscending()}
-            >
-              Price low to high
-            </Button> 
-        </Col>
-        </Row>
-         <Row>
-        <Col>
-            <Button
-              variant="dark"
-              onClick={() => this.sortItemTitleDescending()}
-            >
-              Name Z-A
-            </Button> 
-        </Col>
-        <Col>
-            <Button
-              variant="danger"
-              onClick={() => this.sortItemCategoryDescending()}
-            >
-              Category Z-A
-            </Button> 
-        </Col>
-        <Col>
-            <Button
-              variant="warning"
-              onClick={() => this.sortItemManufacturerDescending()}
-            >
-              Manufacturer Z-A
-            </Button> 
-        </Col>
-        <Col>
-            <Button
-              variant="success"
-              onClick={() => this.sortItemPriceDescending()}
-            >
-              Price high to low
-            </Button> 
-        </Col>
-        </Row>
+            
             </div>
             <div className="row">
               <table className="table table-striped table-bordered">
@@ -265,4 +199,4 @@ class AllItemsComponent extends Component {
   }
 }
 
-export default AllItemsComponent;
+export default BisUserSearchComponent;

@@ -17,8 +17,8 @@ import AllUser from "./components/AllUserComponent";
 import UserDetails from "./components/UserDetailsComponent";
 import UserOrder from "./components/UserOrderComponent"; 
 import ProductReview from "./components/ProductReviewComponent"; 
-import Search from "./components/SearchComponent"; 
-
+import Search from "./components/SearchComponent";  
+import BisUserSearch from "./components/BisUserSearchComponent"; 
 
 class App extends Component {
 constructor(props) {
@@ -125,7 +125,8 @@ render() {
       <Route path={"/userDetails/:id"} component={UserDetails}/> 
       <Route  path={"/userOrder"} component={UserOrder} /> 
       <Route path={"/productReview/:id"} component={ProductReview}/> 
-      <Route path={"/search"} component={Search}/>
+      <Route path={"/search"} component={Search}/> BisUserSearch
+      <Route path={"/bisUserSearch"} component={BisUserSearch}/>
     </Switch>
     </BrowserRouter>
   </div>
