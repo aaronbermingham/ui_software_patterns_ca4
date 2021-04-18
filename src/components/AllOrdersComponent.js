@@ -6,12 +6,11 @@ import UserService from "../services/UserService";
 import CartService from "../services/CartService";
 import { Card, Button, Row, Col, ListGroup } from "react-bootstrap";
 
-class UserOrderComponent extends Component {
+class AllOrdersComponent extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      //id: this.props.match.params.id,
       name: "",
       address: "",
       email: "",
@@ -36,7 +35,7 @@ class UserOrderComponent extends Component {
       });
     }
 
-    CartService.getCartByUserId(user.id).then((res) => {
+    CartService.getOrders().then((res) => {
       let shoppingCart = res.data;
       console.log("Carts ", shoppingCart);
       this.setState({
@@ -57,12 +56,13 @@ class UserOrderComponent extends Component {
         <div className="container">
           <div className="row">
             <div>
-              <h2>Your orders</h2>
+           <h2>All orders</h2>
               {this.state.cart.map((shopCart) => (
                 <Card>
                   <Card.Header>Order num: {shopCart.id}</Card.Header>
                   <Card.Body>
                     <Card.Text>
+                      
                       <p>Total price: €{shopCart.totalPrice}</p>
                       <table className="table table-striped table-bordered">
                         <thead>
@@ -101,4 +101,4 @@ class UserOrderComponent extends Component {
   }
 }
 
-export default UserOrderComponent;
+export default AllOrdersComponent;
