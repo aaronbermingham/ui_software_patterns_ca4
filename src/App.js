@@ -19,7 +19,9 @@ import UserOrder from "./components/UserOrderComponent";
 import ProductReview from "./components/ProductReviewComponent"; 
 import Search from "./components/SearchComponent";  
 import BisUserSearch from "./components/BisUserSearchComponent";  
-import OrderSummary from "./components/OrderSummaryComponent";
+import OrderSummary from "./components/OrderSummaryComponent"; 
+import AllOrders from "./components/AllOrdersComponent";
+
 class App extends Component {
 constructor(props) {
   super(props);
@@ -71,6 +73,7 @@ render() {
                   <Nav className="mr-auto"  >
                     <Nav.Link href={"/allUser"}>Users</Nav.Link>
                     <Nav.Link href={"/allOrders"}>Orders</Nav.Link>
+                    <Nav.Link href="/search" >Search</Nav.Link>
                   </Nav>
                 )}
                 {businessUser && (
@@ -85,6 +88,7 @@ render() {
                   <Nav className="mr-auto" >
                     <Nav.Link href={"/allItems"}>Products</Nav.Link>
                     <Nav.Link href="/userOrder" >Your orders</Nav.Link>
+                    <Nav.Link href="/search" >Search</Nav.Link>
                   </Nav>
                 )}
               </Nav>
@@ -127,7 +131,8 @@ render() {
       <Route path={"/productReview/:id"} component={ProductReview}/> 
       <Route path={"/search"} component={Search}/> 
       <Route path={"/bisUserSearch"} component={BisUserSearch}/> 
-      <Route path={"/orderSummary/:id"} component={OrderSummary}/> 
+      <Route path={"/orderSummary/:id"} component={OrderSummary}/>  
+      <Route path={"/allOrders"} component={AllOrders}/>
     </Switch>
     </BrowserRouter>
   </div>

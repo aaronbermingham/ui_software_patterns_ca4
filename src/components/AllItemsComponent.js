@@ -18,9 +18,9 @@ class AllItemsComponent extends Component {
   componentDidMount() {
     ItemService.getItems().then((res) => {
       this.setState({ item: res.data });
-      console.log("Item ", this.state.item)
+      console.log("Item ", this.state.item);
     });
-   
+
     const user = AuthService.getCurrentUser();
     console.log("Current user ", user);
 
@@ -104,21 +104,19 @@ class AllItemsComponent extends Component {
     ItemService.deleteItem(id).then((res) => {
       ItemService.getItems().then((res) => {
         this.setState({ item: res.data });
-        console.log("Item ", this.state.item)
+        console.log("Item ", this.state.item);
       });
     });
   }
 
-  
   handleSubmit(event) {
-    //alert('A name was submitted: ' + this.input.current.value);
+    //alert("A name was submitted: " + this.input.current.value);
     ItemService.searchItem(this.input.current.value).then((res) => {
-            this.setState({ item: res.data });
-            console.log("Item ", res.data)
-          });
+      this.setState({ item: res.data });
+      console.log("Item ", res.data);
+    });
     event.preventDefault();
   }
-
 
   render() {
     const { businessUser } = this.state;
@@ -128,90 +126,98 @@ class AllItemsComponent extends Component {
           <div>
             <h3 className="text-center">Products</h3>
             <div>
-              
-            <form>
-                    <div className = "form-group">
-                        <label>Search</label>
-                        <input placeholder="Search for item" name="item" className = "form-control"
-                             ref={this.input}
-                            />
-                             <button className = "btn btn-success" onClick={this.handleSubmit} style={{marginTop: "10px"}}>Search item</button>
-                        </div>
-                        </form>
-            <Row>
-        <Col>
-            <Button
-              variant="dark"
-              onClick={() => this.sortItemTitleAscending()}
+              {/* <form>
+                <div className="form-group">
+                <label>Search</label>
+            <input
+              placeholder="Search for item"
+              name="item"
+              className="form-control"
+              ref={this.input}
+            />
+            <button
+              className="btn btn-success"
+              onClick={this.handleSubmit}
+              style={{ marginTop: "10px" }}
             >
-              Name A-Z
-            </Button> 
-        </Col>
-        <Col>
-            <Button
-              variant="danger"
-              onClick={() => this.sortItemCategoryAscending()}
-            >
-              Category A-Z
-            </Button> 
-        </Col>
-        <Col>
-            <Button
-              variant="warning"
-              onClick={() => this.sortItemManufacturerAscending()}
-            >
-              Manufacturer A-Z
-            </Button> 
-        </Col>
-        <Col>
-            <Button
-              variant="success"
-              onClick={() => this.sortItemPriceAscending()}
-            >
-              Price low to high
-            </Button> 
-        </Col>
-        </Row>
-         <Row>
-        <Col>
-            <Button
-              variant="dark"
-              onClick={() => this.sortItemTitleDescending()}
-            >
-              Name Z-A
-            </Button> 
-        </Col>
-        <Col>
-            <Button
-              variant="danger"
-              onClick={() => this.sortItemCategoryDescending()}
-            >
-              Category Z-A
-            </Button> 
-        </Col>
-        <Col>
-            <Button
-              variant="warning"
-              onClick={() => this.sortItemManufacturerDescending()}
-            >
-              Manufacturer Z-A
-            </Button> 
-        </Col>
-        <Col>
-            <Button
-              variant="success"
-              onClick={() => this.sortItemPriceDescending()}
-            >
-              Price high to low
-            </Button> 
-        </Col>
-        </Row>
+              Search item
+            </button>
+                </div>
+              </form> */}
+              <Row>
+                <Col>
+                  <Button
+                    variant="dark"
+                    onClick={() => this.sortItemTitleAscending()}
+                  >
+                    Name A-Z
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    variant="danger"
+                    onClick={() => this.sortItemCategoryAscending()}
+                  >
+                    Category A-Z
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    variant="warning"
+                    onClick={() => this.sortItemManufacturerAscending()}
+                  >
+                    Manufacturer A-Z
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    variant="success"
+                    onClick={() => this.sortItemPriceAscending()}
+                  >
+                    Price low to high
+                  </Button>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Button
+                    variant="dark"
+                    onClick={() => this.sortItemTitleDescending()}
+                  >
+                    Name Z-A
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    variant="danger"
+                    onClick={() => this.sortItemCategoryDescending()}
+                  >
+                    Category Z-A
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    variant="warning"
+                    onClick={() => this.sortItemManufacturerDescending()}
+                  >
+                    Manufacturer Z-A
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    variant="success"
+                    onClick={() => this.sortItemPriceDescending()}
+                  >
+                    Price high to low
+                  </Button>
+                </Col>
+              </Row>
             </div>
             <div className="row">
               <table className="table table-striped table-bordered">
                 <thead>
                   <tr>
-                  <th>Item Id</th>
+                    <th>Item Id</th>
                     <th>Item Name</th>
                     <th>Manufacturer</th>
                     <th>Price</th>
@@ -225,7 +231,7 @@ class AllItemsComponent extends Component {
                 <tbody>
                   {this.state.item.map((item) => (
                     <tr key={item.id}>
-                       <td>{item.id}</td>
+                      <td>{item.id}</td>
                       <td>{item.name}</td>
                       <td>{item.manufacturer}</td>
                       <td>{item.price}</td>
@@ -238,7 +244,6 @@ class AllItemsComponent extends Component {
                         >
                           Update
                         </button>
-                      
                       </td>
                       <td>
                         <button
@@ -247,15 +252,12 @@ class AllItemsComponent extends Component {
                         >
                           Delete
                         </button>
-                      
                       </td>
-
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-
           </div>
         ) : (
           <Lost />

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import CartService from "../services/CartService";
 import ItemService from "../services/ItemService";
-import { Card, Button, Row, Col, ListGroup } from 'react-bootstrap'
+import { Card, Button, Row, Col, ListGroup } from "react-bootstrap";
 import AuthService from "../services/AuthService";
 
 class ItemsComponent extends Component {
@@ -104,23 +104,23 @@ class ItemsComponent extends Component {
     console.log("Booking id", this.state.id);
     CartService.addItemToCart(id, this.state.id).then((res) => {
       let order = res.data;
-      this.setState({orderId:order.id})
-      console.log(order)
+      this.setState({ orderId: order.id });
+      console.log(order);
       this.getCartSummary();
     });
 
     alert("Great choice, that has been added to your order!");
   }
 
-  getCartSummary(){
+  getCartSummary() {
     CartService.getCartById(this.state.orderId).then((res) => {
-        let cart = res.data
-        this.setState({
-           itemList : cart.itemList,
-          totalPrice: cart.totalPrice
-        });
+      let cart = res.data;
+      this.setState({
+        itemList: cart.itemList,
+        totalPrice: cart.totalPrice,
+      });
     });
-}
+  }
 
   continue() {
     this.props.history.push(`/updateProduct/${this.state.orderId}`);
@@ -130,9 +130,7 @@ class ItemsComponent extends Component {
     return (
       <div>
         <h3 className="text-center">Products</h3>
-        <Col>
-        
-        </Col>
+        <Col></Col>
         <Row>
           <Col>
             <Button
@@ -205,55 +203,52 @@ class ItemsComponent extends Component {
 
           <Row>
             <Col>
-            {this.state.item.map((item) => (
-              <Card>
-                <Card.Header>Name: {item.name}</Card.Header>
-                <Card.Body>
-                  <Card.Title>Manufacturer: {item.manufacturer}</Card.Title>
-                  <Card.Text>
-                    <p>Price: {item.price}</p>
+              {this.state.item.map((item) => (
+                <Card>
+                  <Card.Header>Name: {item.name}</Card.Header>
+                  <Card.Body>
+                    <Card.Title>Manufacturer: {item.manufacturer}</Card.Title>
+                    <Card.Text>
+                      <p>Price: {item.price}</p>
 
-                    <p>Type: {item.type}</p>
-                  </Card.Text>
-                  <Button
-                    variant="primary"
-                    onClick={() => this.addItemtoCart(item.id)}
-                  >
-                    Add to order
-                  </Button>
-                </Card.Body>
-              </Card>
-            ))}
+                      <p>Type: {item.type}</p>
+                    </Card.Text>
+                    <Button
+                      variant="primary"
+                      onClick={() => this.addItemtoCart(item.id)}
+                    >
+                      Add to order
+                    </Button>
+                  </Card.Body>
+                </Card>
+              ))}
             </Col>
             <Col>
-          <Card border="primary">
-            <Card.Body>
-              <Card.Title>Your order</Card.Title>
-              <Card.Text>
-                <ListGroup variant="flush">
-                  <ListGroup.Item>
-                    {this.state.itemList.map((subitem, i) => {
-                      return (
-                        <ListGroup.Item>
-                          {subitem.name} 
-                        </ListGroup.Item>
-                      );
-                    })}
-                  </ListGroup.Item>
-                  <ListGroup.Item>Price: {this.state.totalPrice}</ListGroup.Item>
-                </ListGroup>
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <Button variant="primary" onClick={() => this.continue()}>
-            Checkout
-          </Button>
-        </Col>
-            
+              <Card border="primary">
+                <Card.Body>
+                  <Card.Title>Your order</Card.Title>
+                  <Card.Text>
+                    <ListGroup variant="flush">
+                      <ListGroup.Item>
+                        {this.state.itemList.map((subitem, i) => {
+                          return (
+                            <ListGroup.Item>{subitem.name}</ListGroup.Item>
+                          );
+                        })}
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        Price: {this.state.totalPrice}
+                      </ListGroup.Item>
+                    </ListGroup>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+              <Button variant="primary" onClick={() => this.continue()}>
+                Checkout
+              </Button>
+            </Col>
           </Row>
         </Col>
-
-        
       </div>
     );
   }

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ItemService from "../services/ItemService";
 import AuthService from "../services/AuthService";
-import Lost from "./LostComponent";
 import { Card, Form, Row, Col, ListGroup, Button } from "react-bootstrap";
 import CartService from "../services/CartService";
 import AddressService from "../services/AddressService";
@@ -14,7 +13,7 @@ class OrderSummaryComponent extends Component {
       id: this.props.match.params.id,
       userId: 0,
       name: "",
-      uName: '',
+      uName: "",
       address1: "",
       address2: "",
       town: "",
@@ -34,7 +33,7 @@ class OrderSummaryComponent extends Component {
       expDate: "",
       email: "",
       password: "",
-      discountString: "", 
+      discountString: "",
       discount: 0,
     };
     this.changeNameHandler = this.changeNameHandler.bind(this);
@@ -49,7 +48,7 @@ class OrderSummaryComponent extends Component {
     this.changeCcvNumHandler = this.changeCcvNumHandler.bind(this);
     this.changeExpDateHandler = this.changeExpDateHandler.bind(this);
     this.changeEmailHandler = this.changeEmailHandler.bind(this);
-    this.changePasswordHandler = this.changePasswordHandler.bind(this); 
+    this.changePasswordHandler = this.changePasswordHandler.bind(this);
     this.changeDiscountHandler = this.changeDiscountHandler.bind(this);
     this.applyDiscount = this.applyDiscount.bind(this);
   }
@@ -139,7 +138,7 @@ class OrderSummaryComponent extends Component {
   };
 
   changePasswordHandler = (event) => {
-    this.setState({ password: event.target.value }); 
+    this.setState({ password: event.target.value });
   };
 
   changeDiscountHandler = (event) => {
@@ -159,22 +158,23 @@ class OrderSummaryComponent extends Component {
     AddressService.addAddress(address, this.state.userId).then((res) => {});
   };
 
-  applyDiscount(){
-      CartService.discountCart(this.state.id, this.state.discountString).then((res) => {
-          let num = res.data;
-          this.setState({
-              discountPrice: num
-          })
-          console.log("Discount ", num);
+  applyDiscount() {
+    CartService.discountCart(this.state.id, this.state.discountString).then(
+      (res) => {
+        let num = res.data;
+        this.setState({
+          discountPrice: num,
+        });
+        console.log("Discount ", num);
         CartService.getCartById(this.state.id).then((res) => {
-            let cart = res.data;
-            this.setState({
-              itemList: cart.itemList,
-              totalPrice: cart.totalPrice,
-            });
+          let cart = res.data;
+          this.setState({
+            itemList: cart.itemList,
+            totalPrice: cart.totalPrice,
           });
-      });
-
+        });
+      }
+    );
   }
 
   cancel() {
@@ -185,28 +185,27 @@ class OrderSummaryComponent extends Component {
     const { businessUser } = this.state;
     return (
       <div>
-        
-          <div className="container">
-            <div className="row">
-              <div className="card col-md-6 offset-md-3 offset-md-3">
-                <h3 className="text-center">Add your details</h3>
-                <Col>
-                  <Card border="primary">
-                    <Card.Body>
-                      <Card.Title>Your order</Card.Title>
-                      <Card.Text>
-                        <ListGroup variant="flush">
-                          <ListGroup.Item>
-                            {this.state.itemList.map((subitem, i) => {
-                              return (
-                                <ListGroup.Item>{subitem.name}</ListGroup.Item>
-                              );
-                            })}
-                          </ListGroup.Item>
-                          <ListGroup.Item>
-                            Price: {this.state.totalPrice}
-                          </ListGroup.Item>
-                          <ListGroup.Item>
+        <div className="container">
+          <div className="row">
+            <div className="card col-md-6 offset-md-3 offset-md-3">
+              <h3 className="text-center">Add your details</h3>
+              <Col>
+                <Card border="primary">
+                  <Card.Body>
+                    <Card.Title>Your order</Card.Title>
+                    <Card.Text>
+                      <ListGroup variant="flush">
+                        <ListGroup.Item>
+                          {this.state.itemList.map((subitem, i) => {
+                            return (
+                              <ListGroup.Item>{subitem.name}</ListGroup.Item>
+                            );
+                          })}
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                          Price: {this.state.totalPrice}
+                        </ListGroup.Item>
+                        <ListGroup.Item>
                           <div className="form-group">
                             <label>Discount</label>
                             <input
@@ -216,234 +215,233 @@ class OrderSummaryComponent extends Component {
                               value={this.state.discountString}
                               onChange={this.changeDiscountHandler}
                             />
-                           <Button
-                          variant="primary"
-                          type="submit"
-                          onClick={this.applyDiscount}
-                          disabled={this.state.discountPrice > 0} 
-                        >
-                          Submit
-                        </Button>
+                            <Button
+                              variant="primary"
+                              type="submit"
+                              onClick={this.applyDiscount}
+                              disabled={this.state.discountPrice > 0}
+                            >
+                              Submit
+                            </Button>
                           </div>
-                          </ListGroup.Item>
-                        </ListGroup>
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-                <Col>
-                  <div className="card-body">
-                    <form>
-                      <Row>
-                        <Col>
-                          <div className="form-group">
-                            <label>Name</label>
-                            <input
-                              placeholder="Name"
-                              name="uName"
-                              className="form-control"
-                              value={this.state.uName}
-                              onChange={this.changeNameHandler}
-                            />
-                          </div>
-                        </Col>
-                        <Col>
-                          <div className="form-group">
-                            <label>Address Line 1</label>
-                            <input
-                              placeholder="Address Line 1"
-                              name="address1"
-                              className="form-control"
-                              value={this.state.address1}
-                              onChange={this.changeAddress1Handler}
-                            />
-                          </div>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col>
-                          <div className="form-group">
-                            <label>Address Line 2</label>
-                            <input
-                              placeholder="Address Line 2"
-                              name="address2"
-                              className="form-control"
-                              value={this.state.address2}
-                              onChange={this.changeAddress2Handler}
-                            />
-                          </div>
-                        </Col>
-                        <Col>
-                          <div className="form-group">
-                            <label>Town</label>
-                            <input
-                              placeholder="Town"
-                              name="town"
-                              className="form-control"
-                              value={this.state.town}
-                              onChange={this.changeTownHandler}
-                            />
-                          </div>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col>
-                          <div className="form-group">
-                            <label>County</label>
-                            <input
-                              placeholder="County"
-                              name="county"
-                              className="form-control"
-                              value={this.state.county}
-                              onChange={this.changeCountyHandler}
-                            />
-                          </div>
-                        </Col>
-                        <Col>
-                          <div className="form-group">
-                            <label>Country</label>
-                            <input
-                              placeholder="Country"
-                              name="country"
-                              className="form-control"
-                              value={this.state.country}
-                              onChange={this.changeCountryHandler}
-                            />
-                          </div>
-                        </Col>
-                        <Button
-                          variant="primary"
-                          type="submit"
-                          onClick={this.addAddress}
-                        >
-                          Submit
-                        </Button>
-                      </Row>
-                      <Row>
-                        <Form.Check
-                          type="switch"
-                          id="pp"
-                          label="Paypal"
-                          onChange={this.handlePaypalChange}
-                          checked={this.state.pp}
-                        />
-                        <Form.Check
-                          type="switch"
-                          id="cc"
-                          label="Credit Card"
-                          onChange={this.handleCreditChange}
-                          checked={this.state.cc}
-                        />
-                      </Row>
-                      {this.state.cc ? (
-                        <Col>
-                          <Row>
-                            <Col>
-                              <div className="form-group">
-                                <label>Name</label>
-                                <input
-                                  placeholder="Name"
-                                  name="name"
-                                  className="form-control"
-                                  value={this.state.name}
-                                  onChange={this.changeNameHandler}
-                                />
-                              </div>
-                            </Col>
-                            <Col>
-                              <div className="form-group">
-                                <label>Card Number</label>
-                                <input
-                                  placeholder="Card number"
-                                  name="card"
-                                  className="form-control"
-                                  value={this.state.cardNum}
-                                  onChange={this.changeCardNumHandler}
-                                />
-                              </div>
-                            </Col>
-                          </Row>
-                          <Row>
-                            <Col>
-                              <div className="form-group">
-                                <label>Card expiry date</label>
-                                <input
-                                  placeholder="Card expiry date"
-                                  name="expDate"
-                                  className="form-control"
-                                  value={this.state.expDate}
-                                  onChange={this.changeExpDateHandler}
-                                />
-                              </div>
-                            </Col>
-                            <Row>
-                              <div className="form-group">
-                                <label>CCV</label>
-                                <input
-                                  placeholder="CCV"
-                                  name="ccv"
-                                  className="form-control"
-                                  value={this.state.ccv}
-                                  onChange={this.changeCcvNumHandler}
-                                />
-                              </div>
-                            </Row>
-                          </Row>
-                          <Row>
-                              <div className="form-group">
-                                <label>CCV</label>
-                                <input
-                                  placeholder="CCV"
-                                  name="ccv"
-                                  className="form-control"
-                                  value={this.state.ccv}
-                                  onChange={this.changeCcvNumHandler}
-                                />
-                              </div>
-                            </Row>
-                        </Col>
-                      ) : (
-                        <p></p>
-                      )}
-                      {this.state.pp ? (
+                        </ListGroup.Item>
+                      </ListGroup>
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col>
+                <div className="card-body">
+                  <form>
+                    <Row>
+                      <Col>
+                        <div className="form-group">
+                          <label>Name</label>
+                          <input
+                            placeholder="Name"
+                            name="uName"
+                            className="form-control"
+                            value={this.state.uName}
+                            onChange={this.changeNameHandler}
+                          />
+                        </div>
+                      </Col>
+                      <Col>
+                        <div className="form-group">
+                          <label>Address Line 1</label>
+                          <input
+                            placeholder="Address Line 1"
+                            name="address1"
+                            className="form-control"
+                            value={this.state.address1}
+                            onChange={this.changeAddress1Handler}
+                          />
+                        </div>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <div className="form-group">
+                          <label>Address Line 2</label>
+                          <input
+                            placeholder="Address Line 2"
+                            name="address2"
+                            className="form-control"
+                            value={this.state.address2}
+                            onChange={this.changeAddress2Handler}
+                          />
+                        </div>
+                      </Col>
+                      <Col>
+                        <div className="form-group">
+                          <label>Town</label>
+                          <input
+                            placeholder="Town"
+                            name="town"
+                            className="form-control"
+                            value={this.state.town}
+                            onChange={this.changeTownHandler}
+                          />
+                        </div>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <div className="form-group">
+                          <label>County</label>
+                          <input
+                            placeholder="County"
+                            name="county"
+                            className="form-control"
+                            value={this.state.county}
+                            onChange={this.changeCountyHandler}
+                          />
+                        </div>
+                      </Col>
+                      <Col>
+                        <div className="form-group">
+                          <label>Country</label>
+                          <input
+                            placeholder="Country"
+                            name="country"
+                            className="form-control"
+                            value={this.state.country}
+                            onChange={this.changeCountryHandler}
+                          />
+                        </div>
+                      </Col>
+                      <Button
+                        variant="primary"
+                        type="submit"
+                        onClick={this.addAddress}
+                      >
+                        Submit
+                      </Button>
+                    </Row>
+                    <Row>
+                      <Form.Check
+                        type="switch"
+                        id="pp"
+                        label="Paypal"
+                        onChange={this.handlePaypalChange}
+                        checked={this.state.pp}
+                      />
+                      <Form.Check
+                        type="switch"
+                        id="cc"
+                        label="Credit Card"
+                        onChange={this.handleCreditChange}
+                        checked={this.state.cc}
+                      />
+                    </Row>
+                    {this.state.cc ? (
+                      <Col>
                         <Row>
+                          <Col>
+                            <div className="form-group">
+                              <label>Name</label>
+                              <input
+                                placeholder="Name"
+                                name="name"
+                                className="form-control"
+                                value={this.state.name}
+                                onChange={this.changeNameHandler}
+                              />
+                            </div>
+                          </Col>
+                          <Col>
+                            <div className="form-group">
+                              <label>Card Number</label>
+                              <input
+                                placeholder="Card number"
+                                name="card"
+                                className="form-control"
+                                value={this.state.cardNum}
+                                onChange={this.changeCardNumHandler}
+                              />
+                            </div>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col>
+                            <div className="form-group">
+                              <label>Card expiry date</label>
+                              <input
+                                placeholder="Card expiry date"
+                                name="expDate"
+                                className="form-control"
+                                value={this.state.expDate}
+                                onChange={this.changeExpDateHandler}
+                              />
+                            </div>
+                          </Col>
                           <Row>
-                            <Col>
-                              <div className="form-group">
-                                <label>Email address</label>
-                                <input
-                                  placeholder="Card expiry date"
-                                  name="email"
-                                  className="form-control"
-                                  value={this.state.email}
-                                  onChange={this.changeEmailHandler}
-                                />
-                              </div>
-                            </Col>
-                            <Col>
-                              <div className="form-group">
-                                <label>Paypal password</label>
-                                <input
-                                  placeholder="Password"
-                                  name="password"
-                                  className="form-control"
-                                  value={this.state.password}
-                                  onChange={this.changePasswordHandler}
-                                />
-                              </div>
-                            </Col>
+                            <div className="form-group">
+                              <label>CCV</label>
+                              <input
+                                placeholder="CCV"
+                                name="ccv"
+                                className="form-control"
+                                value={this.state.ccv}
+                                onChange={this.changeCcvNumHandler}
+                              />
+                            </div>
                           </Row>
                         </Row>
-                      ) : (
-                        <p></p>
-                      )}
-                    </form>
-                  </div>
-                </Col>
-              </div>
+                        <Row>
+                          <div className="form-group">
+                            <label>CCV</label>
+                            <input
+                              placeholder="CCV"
+                              name="ccv"
+                              className="form-control"
+                              value={this.state.ccv}
+                              onChange={this.changeCcvNumHandler}
+                            />
+                          </div>
+                        </Row>
+                      </Col>
+                    ) : (
+                      <p></p>
+                    )}
+                    {this.state.pp ? (
+                      <Row>
+                        <Row>
+                          <Col>
+                            <div className="form-group">
+                              <label>Email address</label>
+                              <input
+                                placeholder="Card expiry date"
+                                name="email"
+                                className="form-control"
+                                value={this.state.email}
+                                onChange={this.changeEmailHandler}
+                              />
+                            </div>
+                          </Col>
+                          <Col>
+                            <div className="form-group">
+                              <label>Paypal password</label>
+                              <input
+                                placeholder="Password"
+                                name="password"
+                                className="form-control"
+                                value={this.state.password}
+                                onChange={this.changePasswordHandler}
+                              />
+                            </div>
+                          </Col>
+                        </Row>
+                      </Row>
+                    ) : (
+                      <p></p>
+                    )}
+                  </form>
+                </div>
+              </Col>
             </div>
           </div>
-
+        </div>
       </div>
     );
   }

@@ -1,10 +1,8 @@
-
-
 import React, { Component } from "react";
 import ItemService from "../services/ItemService";
 import AuthService from "../services/AuthService";
 import Lost from "./LostComponent";
-import { Card, Button, Row, Col, ListGroup } from "react-bootstrap";
+
 
 class BisUserSearchComponent extends Component {
   constructor(props) {
@@ -16,12 +14,9 @@ class BisUserSearchComponent extends Component {
       currentUser: undefined,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-        
   }
 
   componentDidMount() {
-    
-   
     const user = AuthService.getCurrentUser();
     console.log("Current user ", user);
 
@@ -105,21 +100,19 @@ class BisUserSearchComponent extends Component {
     ItemService.deleteItem(id).then((res) => {
       ItemService.getItems().then((res) => {
         this.setState({ item: res.data });
-        console.log("Item ", this.state.item)
+        console.log("Item ", this.state.item);
       });
     });
   }
 
-  
   handleSubmit(event) {
     //alert('A name was submitted: ' + this.input.current.value);
     ItemService.searchItem(this.input.current.value).then((res) => {
-            this.setState({ item: res.data });
-            console.log("Item ", res.data)
-          });
+      this.setState({ item: res.data });
+      console.log("Item ", res.data);
+    });
     event.preventDefault();
   }
-
 
   render() {
     const { businessUser } = this.state;
@@ -129,23 +122,30 @@ class BisUserSearchComponent extends Component {
           <div>
             <h3 className="text-center">Products</h3>
             <div>
-              
-            <form>
-                    <div className = "form-group">
-                        <label>Search</label>
-                        <input placeholder="Search for item" name="item" className = "form-control"
-                             ref={this.input}
-                            />
-                             <button className = "btn btn-success" onClick={this.handleSubmit} style={{marginTop: "10px"}}>Search item</button>
-                        </div>
-                        </form>
-            
+              <form>
+                <div className="form-group">
+                  <label>Search</label>
+                  <input
+                    placeholder="Search for item"
+                    name="item"
+                    className="form-control"
+                    ref={this.input}
+                  />
+                  <button
+                    className="btn btn-success"
+                    onClick={this.handleSubmit}
+                    style={{ marginTop: "10px" }}
+                  >
+                    Search item
+                  </button>
+                </div>
+              </form>
             </div>
             <div className="row">
               <table className="table table-striped table-bordered">
                 <thead>
                   <tr>
-                  <th>Item Id</th>
+                    <th>Item Id</th>
                     <th>Item Name</th>
                     <th>Manufacturer</th>
                     <th>Price</th>
@@ -159,7 +159,7 @@ class BisUserSearchComponent extends Component {
                 <tbody>
                   {this.state.item.map((item) => (
                     <tr key={item.id}>
-                       <td>{item.id}</td>
+                      <td>{item.id}</td>
                       <td>{item.name}</td>
                       <td>{item.manufacturer}</td>
                       <td>{item.price}</td>
@@ -172,7 +172,6 @@ class BisUserSearchComponent extends Component {
                         >
                           Update
                         </button>
-                      
                       </td>
                       <td>
                         <button
@@ -181,15 +180,12 @@ class BisUserSearchComponent extends Component {
                         >
                           Delete
                         </button>
-                      
                       </td>
-
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-
           </div>
         ) : (
           <Lost />

@@ -5,7 +5,7 @@ import CheckButton from "react-validation/build/button";
 
 import AuthService from "../services/AuthService";
 
-const required = value => {
+const required = (value) => {
   if (!value) {
     return (
       <div className="alert alert-danger" role="alert">
@@ -26,19 +26,19 @@ class LoginComponent extends Component {
       username: "",
       password: "",
       loading: false,
-      message: ""
+      message: "",
     };
   }
 
   onChangeUsername(e) {
     this.setState({
-      username: e.target.value
+      username: e.target.value,
     });
   }
 
   onChangePassword(e) {
     this.setState({
-      password: e.target.value
+      password: e.target.value,
     });
   }
 
@@ -47,7 +47,7 @@ class LoginComponent extends Component {
 
     this.setState({
       message: "",
-      loading: true
+      loading: true,
     });
 
     this.form.validateAll();
@@ -58,7 +58,7 @@ class LoginComponent extends Component {
           this.props.history.push("/userProfile");
           window.location.reload();
         },
-        error => {
+        (error) => {
           const resMessage =
             (error.response &&
               error.response.data &&
@@ -68,13 +68,13 @@ class LoginComponent extends Component {
 
           this.setState({
             loading: false,
-            message: resMessage
+            message: resMessage,
           });
         }
       );
     } else {
       this.setState({
-        loading: false
+        loading: false,
       });
     }
   }
@@ -83,11 +83,9 @@ class LoginComponent extends Component {
     return (
       <div className="col-md-12">
         <div className="card card-container">
-         
-
           <Form
             onSubmit={this.handleLogin}
-            ref={c => {
+            ref={(c) => {
               this.form = c;
             }}
           >
@@ -136,7 +134,7 @@ class LoginComponent extends Component {
             )}
             <CheckButton
               style={{ display: "none" }}
-              ref={c => {
+              ref={(c) => {
                 this.checkBtn = c;
               }}
             />
@@ -146,4 +144,4 @@ class LoginComponent extends Component {
     );
   }
 }
-export default LoginComponent
+export default LoginComponent;
