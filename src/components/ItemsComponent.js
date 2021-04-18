@@ -14,6 +14,7 @@ class ItemsComponent extends Component {
       orderId: 0,
       itemList: [],
       totalPrice: 0,
+      reviewList: [],
     };
     this.sortItemTitleAscending = this.sortItemTitleAscending.bind(this);
   }
@@ -210,8 +211,14 @@ class ItemsComponent extends Component {
                     <Card.Title>Manufacturer: {item.manufacturer}</Card.Title>
                     <Card.Text>
                       <p>Price: {item.price}</p>
-
                       <p>Type: {item.type}</p>
+                      <p>Reviews</p>
+                      <ul>
+                        {item.reviewList.map((subitem, i) => {
+                          return <li>{subitem.reviewText} Rating: {subitem.reviewStars}</li>
+                          
+                        })}
+                      </ul>
                     </Card.Text>
                     <Button
                       variant="primary"
