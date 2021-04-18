@@ -17,6 +17,11 @@ class CartService {
         return axios.get(CART_API_BASE_URL + "cartByUserId/" + userId,{ headers: authHeader() });
     }
 
+    getCartById(cartId){
+        console.log("API call ",CART_API_BASE_URL + "cartByUserId/" + cartId)
+        return axios.get(CART_API_BASE_URL + "cartById/" + cartId,{ headers: authHeader() });
+    }
+
 
 
 
