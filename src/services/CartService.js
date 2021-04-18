@@ -22,6 +22,9 @@ class CartService {
         return axios.get(CART_API_BASE_URL + "cartById/" + cartId,{ headers: authHeader() });
     }
 
+    discountCart(cartId,discount){
+        return axios.get(CART_API_BASE_URL + "cartDiscount/" + cartId +"/"+discount ,{ headers: authHeader() });
+    }
 
 
 

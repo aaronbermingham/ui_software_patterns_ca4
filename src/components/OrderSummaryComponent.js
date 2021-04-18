@@ -34,6 +34,8 @@ class OrderSummaryComponent extends Component {
       expDate: "",
       email: "",
       password: "",
+      discountString: "", 
+      discount: 0,
     };
     this.changeNameHandler = this.changeNameHandler.bind(this);
     this.changeAddress1Handler = this.changeAddress1Handler.bind(this);
@@ -47,7 +49,9 @@ class OrderSummaryComponent extends Component {
     this.changeCcvNumHandler = this.changeCcvNumHandler.bind(this);
     this.changeExpDateHandler = this.changeExpDateHandler.bind(this);
     this.changeEmailHandler = this.changeEmailHandler.bind(this);
-    this.changePasswordHandler = this.changePasswordHandler.bind(this);
+    this.changePasswordHandler = this.changePasswordHandler.bind(this); 
+    this.changeDiscountHandler = this.changeDiscountHandler.bind(this);
+    this.applyDiscount = this.applyDiscount.bind(this);
   }
 
   componentDidMount() {
@@ -135,7 +139,11 @@ class OrderSummaryComponent extends Component {
   };
 
   changePasswordHandler = (event) => {
-    this.setState({ password: event.target.value });
+    this.setState({ password: event.target.value }); 
+  };
+
+  changeDiscountHandler = (event) => {
+    this.setState({ discountString: event.target.value });
   };
 
   addAddress = (e) => {
@@ -150,6 +158,24 @@ class OrderSummaryComponent extends Component {
     console.log("item => " + JSON.stringify(address));
     AddressService.addAddress(address, this.state.userId).then((res) => {});
   };
+
+  applyDiscount(){
+      CartService.discountCart(this.state.id, this.state.discountString).then((res) => {
+          let num = res.data;
+          this.setState({
+              discountPrice: num
+          })
+          console.log("Discount ", num);
+        CartService.getCartById(this.state.id).then((res) => {
+            let cart = res.data;
+            this.setState({
+              itemList: cart.itemList,
+              totalPrice: cart.totalPrice,
+            });
+          });
+      });
+
+  }
 
   cancel() {
     this.props.history.push("/allProducts");
@@ -179,6 +205,26 @@ class OrderSummaryComponent extends Component {
                           </ListGroup.Item>
                           <ListGroup.Item>
                             Price: {this.state.totalPrice}
+                          </ListGroup.Item>
+                          <ListGroup.Item>
+                          <div className="form-group">
+                            <label>Discount</label>
+                            <input
+                              placeholder="Discount"
+                              name="discountString"
+                              className="form-control"
+                              value={this.state.discountString}
+                              onChange={this.changeDiscountHandler}
+                            />
+                           <Button
+                          variant="primary"
+                          type="submit"
+                          onClick={this.applyDiscount}
+                          disabled={this.state.discountPrice > 0} 
+                        >
+                          Submit
+                        </Button>
+                          </div>
                           </ListGroup.Item>
                         </ListGroup>
                       </Card.Text>
